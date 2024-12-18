@@ -1,17 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:taskly_fci/home_screen.dart';
 import 'package:taskly_fci/login.dart';
+import 'package:taskly_fci/profile/profile.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, required String title});
-  static const String screenRoute="loginScreen";
+  static const String screenRoute = "loginScreen";
 
   @override
   State<LoginScreen> createState() => LoginScreenState();
 }
 
 class LoginScreenState extends State<LoginScreen> {
-
   bool showPassword = true;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -27,14 +28,14 @@ class LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.purple,
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-                Image(
+                const Image(
                   image: NetworkImage(
                       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtIr5WW7vtFBwAUwptaRNkOThkxKXZEfjbAA&s"),
                   height: 70,
@@ -50,9 +51,9 @@ class LoginScreenState extends State<LoginScreen> {
                   controller: emailController,
                   validator: (value) {
                     final bool emailValid = RegExp(
-                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                         .hasMatch(value!);
-                    if (value!.isEmpty) {
+                    if (value.isEmpty) {
                       return "Email must not be empty";
                     }
                     return null;
@@ -78,7 +79,6 @@ class LoginScreenState extends State<LoginScreen> {
                     }
                     return null;
                   },
-
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: true,
                   decoration: InputDecoration(
@@ -87,7 +87,6 @@ class LoginScreenState extends State<LoginScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -111,17 +110,21 @@ class LoginScreenState extends State<LoginScreen> {
                   ),
                   child: MaterialButton(
                     onPressed: () async {
-                      if (formKey.currentState!.validate()) {
-                        print(emailController.text);
-                        print(passwordController.text);
+                      print("Clicked material button now");
+
+                      if (emailController.text.isNotEmpty &&
+                          passwordController.text.isNotEmpty) {
                         await FirebaseAuth.instance
                             .signInWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text)
+                                email: emailController.text,
+                                password: passwordController.text)
                             .then((value) {
-                          print(value.user?.email);
-                          print(value.user?.uid);
-                          Navigator.of(context).pushNamed("/");
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomeScreen(
+                                        title: "Home",
+                                      )));
                         }).catchError((error) {
                           print(error.toString());
                         });
@@ -144,7 +147,7 @@ class LoginScreenState extends State<LoginScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => login()),
+                      MaterialPageRoute(builder: (context) => const login()),
                     ); // Add navigation to sign up page
                   },
                   child: const Text(
@@ -162,5 +165,3 @@ class LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-

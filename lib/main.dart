@@ -2,16 +2,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taskly_fci/home.dart';
+import 'package:taskly_fci/home_screen.dart';
 import 'package:taskly_fci/on%20boarding.dart';
-bool show =true;
-void main()async {
+import 'package:taskly_fci/profile/profile.dart';
+
+bool show = true;
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final prefs =await SharedPreferences.getInstance();
-  show  =  prefs.getBool("onboarding")?? true;
-
-
-
+  final prefs = await SharedPreferences.getInstance();
+  show = prefs.getBool("onboarding") ?? true;
 
   runApp(const MyApp());
 }
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: LoginScreen(title: '',)
+      home: Scaffold(body: onboarding(title: 'Introduction')),
     );
   }
 }

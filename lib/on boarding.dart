@@ -15,7 +15,7 @@ class onboarding extends StatelessWidget {
         image: Center(
           child: Image.asset("assets/1.jpg"),
         ),
-        decoration: PageDecoration(
+        decoration: const PageDecoration(
             titleTextStyle:
             TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold))),
     PageViewModel(
@@ -28,7 +28,7 @@ class onboarding extends StatelessWidget {
         image: Center(
           child: Image.asset("assets/2.jpg"),
         ),
-        decoration: PageDecoration(
+        decoration: const PageDecoration(
             titleTextStyle:
             TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold))),
     PageViewModel(
@@ -44,7 +44,7 @@ class onboarding extends StatelessWidget {
         image: Center(
           child: Image.asset("assets/3.png"),
         ),
-        decoration: PageDecoration(
+        decoration: const PageDecoration(
             titleTextStyle:
             TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold))),
   ];
@@ -78,7 +78,7 @@ class onboarding extends StatelessWidget {
             style: TextStyle(fontSize: 20),
           ),
           showNextButton: true,
-          next: Icon(
+          next: const Icon(
             Icons.arrow_forward,
             size: 25,
           ),
@@ -94,6 +94,6 @@ void onDone(context) async{
   final prefs =await SharedPreferences.getInstance();
   await prefs.setBool("ON_BOARDING",false);
   Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      context, MaterialPageRoute(builder: (context) => const LoginScreen(title: '',)));
 }
 

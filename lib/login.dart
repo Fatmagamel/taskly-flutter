@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskly_fci/home.dart';
+
 class login extends StatefulWidget {
   const login({super.key});
 
@@ -10,9 +11,9 @@ class login extends StatefulWidget {
 class _loginState extends State<login> {
   String gender = "Option 1";
   String? Status;
-  double Age=50;
+  double Age = 50;
   bool isSwitched = false;
-  bool  isAccepted =false;
+  bool isAccepted = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,15 +22,14 @@ class _loginState extends State<login> {
         backgroundColor: Colors.purple,
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
-
+        padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-                Image(
+                const Image(
                   image: NetworkImage(
                       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtIr5WW7vtFBwAUwptaRNkOThkxKXZEfjbAA&s"),
                   height: 70,
@@ -65,8 +65,7 @@ class _loginState extends State<login> {
                 ),
                 const SizedBox(height: 16),
 // Gender Radio Buttons
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.start, children: [
+                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                   const Text('Gender:'),
                   const SizedBox(width: 16),
                   Row(
@@ -97,8 +96,7 @@ class _loginState extends State<login> {
                       const Text('Female'),
                     ],
                   ),
-                ]
-                ),
+                ]),
 
                 const SizedBox(width: 16),
                 // Status Dropdown
@@ -114,7 +112,7 @@ class _loginState extends State<login> {
                   ],
                   onChanged: (value) {
                     setState(() {
-                      Status= value;
+                      Status = value;
                     });
                   },
                   hint: const Text('Status'),
@@ -124,7 +122,7 @@ class _loginState extends State<login> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Age+${ Age.toStringAsFixed(0)}"),
+                    Text("Age+${Age.toStringAsFixed(0)}"),
                     Slider(
                       value: Age,
                       onChanged: (value) {
@@ -132,10 +130,9 @@ class _loginState extends State<login> {
                           Age = value;
                         });
                       },
-
                       min: 0,
                       max: 100,
-                      label: '${Age.toStringAsFixed(1)}',
+                      label: Age.toStringAsFixed(1),
                     ),
                   ],
                 ),
@@ -144,14 +141,16 @@ class _loginState extends State<login> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Receive Notifications',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    const Text(
+                      'Receive Notifications',
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     Switch(
                       value: isSwitched,
                       onChanged: (value) {
                         setState(() {
-                          isSwitched=value;
+                          isSwitched = value;
                         });
                       },
                     ),
@@ -165,13 +164,15 @@ class _loginState extends State<login> {
                       value: isAccepted,
                       onChanged: (value) {
                         setState(() {
-                          isAccepted=value!;
+                          isAccepted = value!;
                         });
                       },
                     ),
                     const Expanded(
-                      child: Text('I agree to the Terms and Conditions',
-                        style: TextStyle(fontSize: 16),),
+                      child: Text(
+                        'I agree to the Terms and Conditions',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ],
                 ),
@@ -192,30 +193,19 @@ class _loginState extends State<login> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context,
-                          MaterialPageRoute(builder: (context) => const  LoginScreen())
-                      );
+                      Navigator.pop(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen(
+                                    title: '',
+                                  )));
                     },
                     child: const Text('Sign Up'),
                   ),
                 ),
-
-
-
-
               ]),
         ),
       ),
-
-
-
-
-
-
-
-
-
-
     );
   }
 }
